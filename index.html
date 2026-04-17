@@ -1,0 +1,1389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>dikHatz — Premium Headwear & Custom Patches</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --black: #0a0a0a;
+    --off-black: #111111;
+    --dark-gray: #1c1c1c;
+    --mid-gray: #5a5a5a;
+    --light-gray: #9a9a9a;
+    --silver: #c8c8c8;
+    --off-white: #f0ede8;
+    --cream: #f8f5f0;
+    --white: #ffffff;
+    --beige: #e8e0d4;
+    --warm-beige: #d4c8b8;
+    --accent: #c9a96e;
+    --accent-dark: #a07c45;
+    --font-display: 'Playfair Display', Georgia, serif;
+    --font-body: 'DM Sans', sans-serif;
+    --font-condensed: 'Bebas Neue', sans-serif;
+    --transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --transition-fast: 0.2s ease;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-body);
+    background: var(--cream);
+    color: var(--black);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ANNOUNCEMENT BAR */
+  .announcement-bar {
+    background: var(--black);
+    color: var(--silver);
+    text-align: center;
+    padding: 10px 20px;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 400;
+    position: relative;
+    overflow: hidden;
+  }
+  .announcement-bar span { display: inline-block; animation: marquee 2s linear infinite; white-space: nowrap; }
+  @keyframes marquee { 0% { transform: translateX(30vw); } 100% { transform: translateX(-100%); } }
+  .announcement-bar a { color: var(--accent); text-decoration: none; margin-left: 4px; }
+
+  /* HEADER */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: rgba(248, 245, 240, 0.96);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--beige);
+    transition: all var(--transition);
+  }
+  header.scrolled { background: rgba(10, 10, 10, 0.97); border-bottom-color: #222; }
+  header.scrolled .nav-link, header.scrolled .logo-text, header.scrolled .icon-btn { color: var(--white); }
+  header.scrolled .header-inner { padding: 14px 40px; }
+
+  .header-inner {
+    max-width: 1440px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 40px;
+    transition: padding var(--transition);
+  }
+
+  .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .logo img { height: 36px; width: auto; }
+  .logo-text {
+    font-family: var(--font-condensed);
+    font-size: 28px;
+    letter-spacing: 0.08em;
+    color: var(--black);
+    transition: color var(--transition);
+  }
+
+  nav { display: flex; align-items: center; gap: 32px; }
+  .nav-link {
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--off-black);
+    text-decoration: none;
+    font-weight: 500;
+    position: relative;
+    transition: color var(--transition-fast);
+  }
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -3px; left: 0;
+    width: 0; height: 1px;
+    background: var(--accent);
+    transition: width var(--transition);
+  }
+  .nav-link:hover { color: var(--accent); }
+  .nav-link:hover::after { width: 100%; }
+
+  .nav-dropdown { position: relative; }
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    background: var(--white);
+    border: 1px solid var(--beige);
+    padding: 20px;
+    min-width: 200px;
+    opacity: 0;
+    pointer-events: none;
+    transition: all var(--transition);
+    z-index: 100;
+  }
+  .nav-dropdown:hover .dropdown-menu {
+    opacity: 1;
+    pointer-events: all;
+    transform: translateX(-50%) translateY(0);
+  }
+  .dropdown-menu a {
+    display: block;
+    padding: 8px 0;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--mid-gray);
+    text-decoration: none;
+    border-bottom: 1px solid var(--off-white);
+    transition: color var(--transition-fast);
+  }
+  .dropdown-menu a:last-child { border-bottom: none; }
+  .dropdown-menu a:hover { color: var(--black); }
+
+  .header-icons { display: flex; align-items: center; gap: 20px; }
+  .icon-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--black);
+    font-size: 18px;
+    transition: color var(--transition-fast);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px; height: 36px;
+  }
+  .icon-btn:hover { color: var(--accent); }
+  .cart-btn { position: relative; }
+  .cart-count {
+    position: absolute;
+    top: -4px; right: -4px;
+    background: var(--accent);
+    color: var(--white);
+    font-size: 9px;
+    font-weight: 500;
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; border: none; background: none; }
+  .hamburger span { display: block; width: 22px; height: 1.5px; background: var(--black); transition: all var(--transition); }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    background: var(--off-black);
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('https://dikhatz.com/cdn/shop/files/Patches_banner_02_black_coat_mobile.gif?v=1771964351');
+    background-size: cover;
+    background-position: center;
+    transform: scale(1.05);
+    transition: transform 8s ease;
+    filter: brightness(0.55);
+  }
+  .hero:hover .hero-bg { transform: scale(1); }
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(105deg, rgba(10,10,10,0.85) 0%, rgba(10,10,10,0.3) 60%, transparent 100%);
+  }
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 40px;
+    width: 100%;
+  }
+  .hero-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 24px;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: var(--accent);
+  }
+  .hero-headline {
+    font-family: var(--font-display);
+    font-size: clamp(56px, 9vw, 130px);
+    font-weight: 900;
+    color: var(--white);
+    line-height: 0.9;
+    margin-bottom: 32px;
+    letter-spacing: -0.02em;
+  }
+  .hero-headline em {
+    font-style: italic;
+    color: var(--accent);
+    display: block;
+  }
+  .hero-subtext {
+    font-size: 16px;
+    color: rgba(255,255,255,0.65);
+    max-width: 420px;
+    line-height: 1.7;
+    margin-bottom: 48px;
+    font-weight: 300;
+  }
+  .hero-ctas { display: flex; gap: 16px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--accent);
+    color: var(--black);
+    padding: 16px 40px;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    font-weight: 500;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all var(--transition);
+    font-family: var(--font-body);
+    border: 1px solid var(--accent);
+  }
+  .btn-primary:hover { background: transparent; color: var(--accent); }
+  .btn-outline {
+    background: transparent;
+    color: var(--white);
+    padding: 16px 40px;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    font-weight: 500;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid rgba(255,255,255,0.4);
+    transition: all var(--transition);
+    font-family: var(--font-body);
+  }
+  .btn-outline:hover { border-color: var(--white); background: var(--white); color: var(--black); }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255,255,255,0.4);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+  .scroll-line {
+    width: 1px;
+    height: 50px;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.4), transparent);
+    animation: scrollPulse 1s ease infinite;
+  }
+  @keyframes scrollPulse { 0%,100%{transform:scaleY(1);opacity:1} 50%{transform:scaleY(0.6);opacity:0.5} }
+
+  /* SECTION WRAPPER */
+  .section {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 100px 40px;
+  }
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-label::before { content:''; display:block; width:30px; height:1px; background:var(--accent); }
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(36px, 5vw, 64px);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--black);
+  }
+  .section-title em { font-style: italic; color: var(--accent); }
+
+  /* CATEGORIES */
+  .categories-section { background: var(--cream); }
+  .categories-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    margin-top: 60px;
+  }
+  .category-card {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 3/4;
+    cursor: pointer;
+    background: var(--dark-gray);
+    text-decoration: none;
+    display: block;
+  }
+  .category-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    filter: brightness(0.7);
+  }
+  .category-card:hover img { transform: scale(1.08); filter: brightness(0.5); }
+  .category-card-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 30px;
+    background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 60%);
+  }
+  .category-name {
+    font-family: var(--font-condensed);
+    font-size: 28px;
+    letter-spacing: 0.05em;
+    color: var(--white);
+    transition: transform var(--transition);
+  }
+  .category-card:hover .category-name { transform: translateY(-4px); }
+  .category-link {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-top: 6px;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: all var(--transition);
+  }
+  .category-card:hover .category-link { opacity: 1; transform: translateY(0); }
+
+  /* BEST SELLERS */
+  .bestsellers-section { background: var(--off-white); }
+  .products-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 60px;
+  }
+  .view-all-link {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--black);
+    text-decoration: none;
+    border-bottom: 1px solid var(--black);
+    padding-bottom: 2px;
+    transition: all var(--transition-fast);
+  }
+  .view-all-link:hover { color: var(--accent); border-color: var(--accent); }
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+  .product-card {
+    background: var(--white);
+    cursor: pointer;
+    transition: transform var(--transition);
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+  .product-card:hover { transform: translateY(-6px); }
+  .product-img-wrap {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 1;
+    background: var(--cream);
+  }
+  .product-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  .product-card:hover .product-img-wrap img { transform: scale(1.06); }
+  .product-badge {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    background: var(--black);
+    color: var(--white);
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 5px 10px;
+  }
+  .product-overlay {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 16px;
+    background: rgba(10,10,10,0.92);
+    transform: translateY(100%);
+    transition: transform var(--transition);
+  }
+  .product-card:hover .product-overlay { transform: translateY(0); }
+  .add-to-cart-btn {
+    width: 100%;
+    background: var(--accent);
+    color: var(--black);
+    border: none;
+    padding: 12px;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background var(--transition-fast);
+    font-family: var(--font-body);
+  }
+  .add-to-cart-btn:hover { background: var(--white); }
+  .product-info { padding: 20px; }
+  .product-name {
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.3;
+    margin-bottom: 6px;
+    color: var(--black);
+  }
+  .product-collection {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--light-gray);
+    margin-bottom: 10px;
+  }
+  .product-price {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--black);
+  }
+
+  /* WHY CHOOSE US */
+  .trust-section { background: var(--black); color: var(--white); }
+  .trust-section .section-title { color: var(--white); }
+  .trust-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 60px;
+    margin-top: 70px;
+  }
+  .trust-item { text-align: center; }
+  .trust-icon {
+    width: 64px; height: 64px;
+    margin: 0 auto 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(201, 169, 110, 0.3);
+    color: var(--accent);
+  }
+  .trust-icon svg { width: 28px; height: 28px; }
+  .trust-title {
+    font-family: var(--font-condensed);
+    font-size: 22px;
+    letter-spacing: 0.1em;
+    color: var(--white);
+    margin-bottom: 12px;
+  }
+  .trust-desc {
+    font-size: 14px;
+    color: var(--light-gray);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  /* BRAND STORY */
+  .brand-story { background: var(--cream); }
+  .brand-story-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .brand-story-img {
+    position: relative;
+    aspect-ratio: 4/5;
+    overflow: hidden;
+  }
+  .brand-story-img img { width: 100%; height: 100%; object-fit: cover; }
+  .brand-story-img::after {
+    content: '';
+    position: absolute;
+    bottom: -20px; right: -20px;
+    width: 50%;
+    height: 50%;
+    border: 1px solid var(--accent);
+    z-index: -1;
+  }
+  .brand-story-content { padding: 20px 0; }
+  .brand-quote {
+    font-family: var(--font-display);
+    font-size: clamp(20px, 2.5vw, 28px);
+    font-style: italic;
+    color: var(--black);
+    line-height: 1.4;
+    margin: 32px 0;
+    padding-left: 28px;
+    border-left: 2px solid var(--accent);
+  }
+  .brand-body {
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--mid-gray);
+    font-weight: 300;
+    margin-bottom: 40px;
+  }
+
+  /* FEATURES SLIDER */
+  .slider-section { background: var(--off-white); overflow: hidden; }
+  .slider-header { display: flex; justify-content: space-between; align-items: flex-end; }
+  .slider-controls { display: flex; gap: 12px; }
+  .slider-btn {
+    width: 48px; height: 48px;
+    border: 1px solid var(--beige);
+    background: none;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all var(--transition-fast);
+    color: var(--black);
+  }
+  .slider-btn:hover { background: var(--black); color: var(--white); border-color: var(--black); }
+  .slider-track-wrap { overflow: hidden; margin-top: 60px; }
+  .slider-track {
+    display: flex;
+    gap: 24px;
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  .slide-item {
+    flex: 0 0 calc(33.333% - 16px);
+    background: var(--white);
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+  .slide-item img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    transition: transform 0.7s ease;
+  }
+  .slide-item:hover img { transform: scale(1.05); }
+  .slide-info { padding: 20px; }
+  .slide-name {
+    font-family: var(--font-display);
+    font-size: 17px;
+    font-weight: 400;
+    margin-bottom: 4px;
+  }
+  .slide-price { font-size: 13px; color: var(--mid-gray); }
+
+  /* TESTIMONIALS */
+  .testimonials-section { background: var(--off-black); }
+  .testimonials-section .section-title { color: var(--white); }
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 60px;
+  }
+  .testimonial-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 36px;
+    transition: border-color var(--transition-fast);
+  }
+  .testimonial-card:hover { border-color: rgba(201,169,110,0.4); }
+  .stars { color: var(--accent); font-size: 14px; margin-bottom: 20px; letter-spacing: 2px; }
+  .testimonial-text {
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-style: italic;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+  .testimonial-author { display: flex; align-items: center; gap: 14px; }
+  .author-avatar {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--black);
+    flex-shrink: 0;
+  }
+  .author-name { font-size: 13px; font-weight: 500; color: var(--white); }
+  .author-role { font-size: 11px; color: var(--light-gray); margin-top: 2px; }
+
+  /* NEWSLETTER */
+  .newsletter-section {
+    background: var(--accent);
+    padding: 100px 40px;
+  }
+  .newsletter-inner {
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .newsletter-label {
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: rgba(10,10,10,0.6);
+    margin-bottom: 20px;
+  }
+  .newsletter-title {
+    font-family: var(--font-display);
+    font-size: clamp(32px, 5vw, 52px);
+    font-weight: 700;
+    color: var(--black);
+    line-height: 1.1;
+    margin-bottom: 16px;
+    letter-spacing: -0.02em;
+  }
+  .newsletter-subtitle {
+    font-size: 15px;
+    color: rgba(10,10,10,0.65);
+    margin-bottom: 40px;
+    font-weight: 300;
+  }
+  .newsletter-form { display: flex; gap: 0; max-width: 500px; margin: 0 auto; }
+  .newsletter-input {
+    flex: 1;
+    padding: 16px 24px;
+    border: none;
+    background: var(--black);
+    color: var(--white);
+    font-size: 13px;
+    font-family: var(--font-body);
+    outline: none;
+  }
+  .newsletter-input::placeholder { color: rgba(255,255,255,0.4); }
+  .newsletter-btn {
+    background: var(--black);
+    color: var(--white);
+    border: none;
+    padding: 16px 32px;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-family: var(--font-body);
+    font-weight: 500;
+    border-left: 1px solid rgba(255,255,255,0.1);
+    transition: background var(--transition-fast);
+  }
+  .newsletter-btn:hover { background: #1a1a1a; }
+
+  /* FOOTER */
+  footer {
+    background: var(--black);
+    color: var(--white);
+    padding: 80px 40px 40px;
+  }
+  .footer-top {
+    max-width: 1440px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 60px;
+    padding-bottom: 60px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .footer-brand .logo-text { color: var(--white); font-size: 32px; }
+  .footer-tagline {
+    font-size: 14px;
+    color: var(--light-gray);
+    line-height: 1.7;
+    margin: 20px 0 30px;
+    font-weight: 300;
+    max-width: 260px;
+  }
+  .footer-social { display: flex; gap: 12px; }
+  .social-btn {
+    width: 38px; height: 38px;
+    border: 1px solid rgba(255,255,255,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: var(--light-gray);
+    font-size: 14px;
+    transition: all var(--transition-fast);
+  }
+  .social-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .footer-col-title {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--white);
+    font-weight: 500;
+    margin-bottom: 24px;
+  }
+  .footer-links { list-style: none; }
+  .footer-links li { margin-bottom: 12px; }
+  .footer-links a {
+    font-size: 13px;
+    color: var(--light-gray);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+    font-weight: 300;
+  }
+  .footer-links a:hover { color: var(--accent); }
+  .footer-bottom {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .footer-copy { font-size: 12px; color: rgba(255,255,255,0.3); }
+  .footer-legal { display: flex; gap: 24px; }
+  .footer-legal a { font-size: 12px; color: rgba(255,255,255,0.3); text-decoration: none; }
+  .footer-legal a:hover { color: rgba(255,255,255,0.6); }
+
+  /* MOBILE NAV */
+  .mobile-nav {
+    position: fixed;
+    inset: 0;
+    background: var(--black);
+    z-index: 2000;
+    transform: translateX(100%);
+    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    padding: 80px 40px 40px;
+    overflow-y: auto;
+  }
+  .mobile-nav.open { transform: translateX(0); }
+  .mobile-nav-close {
+    position: absolute;
+    top: 24px; right: 30px;
+    background: none;
+    border: none;
+    color: var(--white);
+    font-size: 24px;
+    cursor: pointer;
+  }
+  .mobile-nav a {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 36px;
+    color: var(--white);
+    text-decoration: none;
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    transition: color var(--transition-fast);
+  }
+  .mobile-nav a:hover { color: var(--accent); }
+
+  /* ANIMATIONS */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+  /* RESPONSIVE */
+  @media (max-width: 1100px) {
+    .products-grid { grid-template-columns: repeat(2, 1fr); }
+    .categories-grid { grid-template-columns: repeat(2, 1fr); }
+    .trust-grid { grid-template-columns: repeat(2, 1fr); gap: 40px; }
+    .slide-item { flex: 0 0 calc(50% - 12px); }
+  }
+  @media (max-width: 768px) {
+    nav { display: none; }
+    .hamburger { display: flex; }
+    .header-inner { padding: 16px 20px; }
+    .section { padding: 70px 20px; }
+    .hero-content { padding: 0 20px; }
+    .brand-story-grid { grid-template-columns: 1fr; gap: 40px; }
+    .brand-story-img::after { display: none; }
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; }
+    .footer-bottom { flex-direction: column; align-items: flex-start; }
+    .newsletter-form { flex-direction: column; }
+    .newsletter-section { padding: 60px 20px; }
+    .footer-brand { grid-column: 1 / -1; }
+    .slide-item { flex: 0 0 calc(80% - 12px); }
+    .trust-grid { grid-template-columns: 1fr; }
+    .products-header { flex-direction: column; align-items: flex-start; gap: 20px; }
+  }
+  @media (max-width: 480px) {
+    .categories-grid { grid-template-columns: 1fr; }
+    .footer-top { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ANNOUNCEMENT BAR -->
+<div class="announcement-bar">
+  <span>Free Shipping on Orders Over $75 &nbsp;·&nbsp; Interchangeable Velcro Patches &nbsp;·&nbsp; Build Your Bundle &nbsp;·&nbsp; Custom Patches Available &nbsp;·&nbsp; <a href="https://dikhatz.com/collections/all">Shop All →</a></span>
+</div>
+
+<!-- HEADER -->
+<header id="mainHeader">
+  <div class="header-inner">
+    <a href="https://dikhatz.com/" class="logo">
+      <span class="logo-text">dikHatz</span>
+    </a>
+    <nav>
+      <div class="nav-dropdown">
+        <a href="#" class="nav-link">Hats ↓</a>
+        <div class="dropdown-menu">
+          <a href="https://dikhatz.com/collections/rope-hats">The GOAT</a>
+          <a href="#">The OG</a>
+          <a href="#">The Legazy</a>
+          <a href="#">The Franchize</a>
+          <a href="#">KZ-Style</a>
+          <a href="https://dikhatz.com/collections/caps">All Hats</a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <a href="#" class="nav-link">Collections ↓</a>
+        <div class="dropdown-menu">
+          <a href="https://dikhatz.com/pages/carolinas">Carolinas</a>
+          <a href="https://dikhatz.com/pages/dfw">DFW</a>
+          <a href="https://dikhatz.com/pages/golf">Golf</a>
+          <a href="https://dikhatz.com/pages/nola">NOLA</a>
+          <a href="https://dikhatz.com/pages/tejas">Tejas</a>
+        </div>
+      </div>
+      <a href="https://dikhatz.com/collections/patches" class="nav-link">Patches</a>
+      <a href="#" class="nav-link">Build a Bundle</a>
+      <a href="https://dikhatz.com/pages/custom-patch-design" class="nav-link">Custom</a>
+      <a href="https://dikhatz.com/pages/about-us" class="nav-link">Our Story</a>
+    </nav>
+    <div class="header-icons">
+      <button class="icon-btn" aria-label="Search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      </button>
+      <button class="icon-btn cart-btn" aria-label="Cart">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <span class="cart-count">0</span>
+      </button>
+      <button class="hamburger" id="hamburgerBtn" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav">
+  <button class="mobile-nav-close" id="closeNav">✕</button>
+  <a href="https://dikhatz.com/collections/caps">Hats</a>
+  <a href="#">Collections</a>
+  <a href="https://dikhatz.com/collections/patches">Patches</a>
+  <a href="#">Build a Bundle</a>
+  <a href="https://dikhatz.com/pages/custom-patch-design">Custom Patches</a>
+  <a href="https://dikhatz.com/pages/about-us">Our Story</a>
+  <a href="https://dikhatz.com/collections/all">Shop All</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Premium Headwear · Est. 2023</p>
+    <h1 class="hero-headline">
+      Wear Your<br>
+      <em>Identity.</em>
+    </h1>
+    <p class="hero-subtext">Interchangeable velcro patches. Custom headwear. Unlimited self-expression — without saying a word.</p>
+    <div class="hero-ctas">
+      <a href="https://dikhatz.com/collections/all" class="btn-primary">Shop Collection →</a>
+      <a href="https://dikhatz.com/pages/custom-patch-design" class="btn-outline">Custom Patches</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- CATEGORIES -->
+<div class="categories-section">
+  <div class="section">
+    <p class="section-label reveal">Shop by Category</p>
+    <h2 class="section-title reveal reveal-delay-1">Find Your <em>Style</em></h2>
+    <div class="categories-grid">
+      <a href="https://dikhatz.com/collections/caps" class="category-card reveal">
+        <img src="https://dikhatz.com/cdn/shop/files/1_c1dce45c-97ed-4df9-a6f2-423c0b4857a8.webp?v=1768254018" alt="Snapbacks" loading="lazy">
+        <div class="category-card-overlay">
+          <div class="category-name">Snapbacks</div>
+          <div class="category-link">Shop Now →</div>
+        </div>
+      </a>
+      <a href="https://dikhatz.com/collections/rope-hats" class="category-card reveal reveal-delay-1">
+        <img src="https://dikhatz.com/cdn/shop/files/2.webp?v=1768254053" alt="All Hats" loading="lazy">
+        <div class="category-card-overlay">
+          <div class="category-name">Rope Hats</div>
+          <div class="category-link">Shop Now →</div>
+        </div>
+      </a>
+      <a href="https://dikhatz.com/collections/patches" class="category-card reveal reveal-delay-2">
+        <img src="https://dikhatz.com/cdn/shop/files/4.webp?v=1768254053" alt="Patches" loading="lazy">
+        <div class="category-card-overlay">
+          <div class="category-name">Patches</div>
+          <div class="category-link">Shop Now →</div>
+        </div>
+      </a>
+      <a href="#" class="category-card reveal reveal-delay-3">
+        <img src="https://dikhatz.com/cdn/shop/files/3_1.webp?v=1768254044" alt="Collections" loading="lazy">
+        <div class="category-card-overlay">
+          <div class="category-name">Collections</div>
+          <div class="category-link">Explore →</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- BEST SELLERS -->
+<div class="bestsellers-section">
+  <div class="section">
+    <div class="products-header">
+      <div>
+        <p class="section-label reveal">Most Loved</p>
+        <h2 class="section-title reveal reveal-delay-1">Best <em>Sellers</em></h2>
+      </div>
+      <a href="https://dikhatz.com/collections/all" class="view-all-link reveal">View All Products</a>
+    </div>
+    <div class="products-grid">
+      <a href="https://dikhatz.com/collections/rope-hats/products/zapped-headwear-blackhawk-r-rope-hat_off-white-red-rope" class="product-card reveal">
+        <div class="product-img-wrap">
+          <img src="https://dikhatz.com/cdn/shop/files/1_c1dce45c-97ed-4df9-a6f2-423c0b4857a8.webp?v=1768254018" alt="KZ Style Hat" loading="lazy">
+          <span class="product-badge">Best Seller</span>
+          <div class="product-overlay">
+            <button class="add-to-cart-btn">Add to Cart</button>
+          </div>
+        </div>
+        <div class="product-info">
+          <div class="product-collection">KZ Style · Rope Hat</div>
+          <div class="product-name">Blackhawk Rope Hat</div>
+          <div class="product-price">$34.99</div>
+        </div>
+      </a>
+      <a href="https://dikhatz.com/collections/rope-hats/products/cap-america-i7256-athletic-rope-cap-1" class="product-card reveal reveal-delay-1">
+        <div class="product-img-wrap">
+          <img src="https://dikhatz.com/cdn/shop/files/2.webp?v=1768254053" alt="Cap America Rope Cap" loading="lazy">
+          <span class="product-badge">New</span>
+          <div class="product-overlay">
+            <button class="add-to-cart-btn">Add to Cart</button>
+          </div>
+        </div>
+        <div class="product-info">
+          <div class="product-collection">Cap America · i7256</div>
+          <div class="product-name">Athletic Rope Cap</div>
+          <div class="product-price">$34.99</div>
+        </div>
+      </a>
+      <a href="https://dikhatz.com/products/dikhatz-keep-it-covered-premium-3d-stealth-red-patch" class="product-card reveal reveal-delay-2">
+        <div class="product-img-wrap">
+          <img src="https://dikhatz.com/cdn/shop/files/4.webp?v=1768254053" alt="Keep It Covered Patch" loading="lazy">
+          <div class="product-overlay">
+            <button class="add-to-cart-btn">Add to Cart</button>
+          </div>
+        </div>
+        <div class="product-info">
+          <div class="product-collection">Patch · 3D Premium</div>
+          <div class="product-name">"Keep It Covered" Stealth Patch</div>
+          <div class="product-price">$14.99</div>
+        </div>
+      </a>
+      <a href="https://dikhatz.com/products/dikhatz-heritage-flag-red-premium-3d-rubberized-americana-patch" class="product-card reveal reveal-delay-3">
+        <div class="product-img-wrap">
+          <img src="https://dikhatz.com/cdn/shop/files/3_1.webp?v=1768254044" alt="Heritage Flag Patch" loading="lazy">
+          <span class="product-badge">Fan Fav</span>
+          <div class="product-overlay">
+            <button class="add-to-cart-btn">Add to Cart</button>
+          </div>
+        </div>
+        <div class="product-info">
+          <div class="product-collection">Patch · Americana</div>
+          <div class="product-name">"Heritage Flag RED" Rubberized Patch</div>
+          <div class="product-price">$14.99</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- TRUST / WHY CHOOSE US -->
+<div class="trust-section">
+  <div class="section">
+    <p class="section-label reveal" style="color:rgba(201,169,110,0.7)">Why dikHatz</p>
+    <h2 class="section-title reveal reveal-delay-1">Built for<br><em style="color:var(--accent)">Everyday Legends</em></h2>
+    <div class="trust-grid">
+      <div class="trust-item reveal">
+        <div class="trust-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="trust-title">Breathable Fabric</div>
+        <p class="trust-desc">Engineered with premium breathable materials to keep you cool and comfortable in any condition, all day long.</p>
+      </div>
+      <div class="trust-item reveal reveal-delay-1">
+        <div class="trust-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        </div>
+        <div class="trust-title">UV Resistant</div>
+        <p class="trust-desc">UV-resistant materials protect you from harmful sun rays while maintaining that fresh, clean look you demand.</p>
+      </div>
+      <div class="trust-item reveal reveal-delay-2">
+        <div class="trust-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </div>
+        <div class="trust-title">All-Day Comfort</div>
+        <p class="trust-desc">A moisture-wicking sweatband keeps you fresh from dawn to dusk — whether on the course, streets, or sidelines.</p>
+      </div>
+      <div class="trust-item reveal">
+        <div class="trust-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </div>
+        <div class="trust-title">Interchangeable Patches</div>
+        <p class="trust-desc">Velcro-backed patches swap in seconds. One hat, infinite looks — rep your city, team, or vibe without a new hat.</p>
+      </div>
+      <div class="trust-item reveal reveal-delay-1">
+        <div class="trust-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div class="trust-title">Fast Shipping</div>
+        <p class="trust-desc">Quick turnaround from warehouse to door. Track your order every step of the way with real-time updates.</p>
+      </div>
+      <div class="trust-item reveal reveal-delay-2">
+        <div class="trust-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><path d="M12 22V7M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
+        </div>
+        <div class="trust-title">Custom Orders</div>
+        <p class="trust-desc">Design your own patches for your team, event, or brand. Corporate, sports, and personal custom orders welcome.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BRAND STORY -->
+<div class="brand-story">
+  <div class="section">
+    <div class="brand-story-grid">
+      <div class="brand-story-img reveal">
+        <img src="https://dikhatz.com/cdn/shop/files/Less-Gear-MOB.jpg?v=1768683582" alt="dikHatz Brand Story" loading="lazy">
+      </div>
+      <div class="brand-story-content">
+        <p class="section-label reveal">Our Story</p>
+        <h2 class="section-title reveal reveal-delay-1">More Than a Hat.<br><em>A Statement.</em></h2>
+        <blockquote class="brand-quote reveal reveal-delay-2">
+          "Interchangeable Velcro Patches, that are customized to rep your team, your city, or your events."
+        </blockquote>
+        <p class="brand-body reveal reveal-delay-3">
+          dikHatz was born from a simple idea: your headwear should be as versatile as you are. We created a premium hat system where you can mix and match patches to reflect your personality — without saying a word. Switch up your look without needing to buy a new hat. Express yourself endlessly.
+          <br><br>
+          From the Carolinas to DFW, from the Dirty South to NOLA — we've built collections for every city, every story, every legend.
+        </p>
+        <div class="reveal reveal-delay-4">
+          <a href="https://dikhatz.com/pages/about-us" class="btn-primary" style="display:inline-flex;">Read Our Story →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FEATURED COLLECTION SLIDER -->
+<div class="slider-section">
+  <div class="section">
+    <div class="slider-header">
+      <div>
+        <p class="section-label">Featured Collection</p>
+        <h2 class="section-title">Seasonal <em>Favorites</em></h2>
+      </div>
+      <div class="slider-controls">
+        <button class="slider-btn" id="prevBtn" aria-label="Previous">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button class="slider-btn" id="nextBtn" aria-label="Next">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="slider-track-wrap">
+      <div class="slider-track" id="sliderTrack">
+        <a href="https://dikhatz.com/collections/no-rope-hats/products/zapped-headwear-blackhawk-5-panel-perforated" class="slide-item">
+          <img src="https://dikhatz.com/cdn/shop/files/1_c1dce45c-97ed-4df9-a6f2-423c0b4857a8.webp?v=1768254018" alt="KR Style Hat" loading="lazy">
+          <div class="slide-info">
+            <div class="slide-name">KR Style — 5 Panel Perforated</div>
+            <div class="slide-price">$34.99</div>
+          </div>
+        </a>
+        <a href="https://dikhatz.com/collections/no-rope-hats/products/cap-america-i3021-heritage-corduroy-trucker-cap-1" class="slide-item">
+          <img src="https://dikhatz.com/cdn/shop/files/3_1.webp?v=1768254044" alt="Corduroy Trucker" loading="lazy">
+          <div class="slide-info">
+            <div class="slide-name">Heritage Corduroy Trucker</div>
+            <div class="slide-price">$34.99</div>
+          </div>
+        </a>
+        <a href="https://dikhatz.com/collections/snapback" class="slide-item">
+          <img src="https://dikhatz.com/cdn/shop/files/4.webp?v=1768254053" alt="Snapback Collection" loading="lazy">
+          <div class="slide-info">
+            <div class="slide-name">Premium Snapback Series</div>
+            <div class="slide-price">$34.99</div>
+          </div>
+        </a>
+        <a href="https://dikhatz.com/products/dikhatz-omaha-diamond-premium-3d-rubberized-baseball-patch" class="slide-item">
+          <img src="https://dikhatz.com/cdn/shop/files/2.webp?v=1768254053" alt="Omaha Diamond Patch" loading="lazy">
+          <div class="slide-info">
+            <div class="slide-name">"OMAHA Diamond" 3D Patch</div>
+            <div class="slide-price">$14.99</div>
+          </div>
+        </a>
+        <a href="https://dikhatz.com/products/dikhatz-lets-roll-premium-3d-rubberized-tidal-patch" class="slide-item">
+          <img src="https://dikhatz.com/cdn/shop/files/1_c1dce45c-97ed-4df9-a6f2-423c0b4857a8.webp?v=1768254018" alt="Lets Roll Patch" loading="lazy">
+          <div class="slide-info">
+            <div class="slide-name">"Let's Roll" Tidal Patch</div>
+            <div class="slide-price">$14.99</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TESTIMONIALS -->
+<div class="testimonials-section">
+  <div class="section">
+    <p class="section-label reveal" style="color:rgba(201,169,110,0.7)">What People Say</p>
+    <h2 class="section-title reveal reveal-delay-1">Customer <em style="color:var(--accent)">Love</em></h2>
+    <div class="testimonials-grid">
+      <div class="testimonial-card reveal">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"I absolutely love my new cap from dikHatz! The quality is top-notch and it fits perfectly. I keep getting compliments everywhere I go."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">LM</div>
+          <div>
+            <div class="author-name">Lucas M.</div>
+            <div class="author-role">Small Business Owner</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal reveal-delay-1">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"dikHatz never disappoints! The material feels premium and the design is unique. Perfect for both casual and trendy everyday wear."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">RL</div>
+          <div>
+            <div class="author-name">Rachel L.</div>
+            <div class="author-role">Fashion Brand Founder</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal reveal-delay-2">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"Amazing customer service and super fast delivery. The cap looks exactly like the pictures and feels incredibly durable. Ordering again soon!"</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">AV</div>
+          <div>
+            <div class="author-name">Anna V.</div>
+            <div class="author-role">UI/UX Designer</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- NEWSLETTER -->
+<div class="newsletter-section">
+  <div class="newsletter-inner">
+    <p class="newsletter-label">Stay in the Loop</p>
+    <h2 class="newsletter-title">Join the dikHatz Community</h2>
+    <p class="newsletter-subtitle">Get early access to new drops, exclusive offers, and style inspiration delivered straight to you.</p>
+    <form class="newsletter-form" onsubmit="handleNewsletterSubmit(event)">
+      <input type="email" class="newsletter-input" placeholder="Your email address" required>
+      <button type="submit" class="newsletter-btn">Subscribe</button>
+    </form>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="logo-text">dikHatz</div>
+      <p class="footer-tagline">Premium headwear with interchangeable velcro patches. Rep your city, your team, your story — without saying a word.</p>
+      <div class="footer-social">
+        <a href="#" class="social-btn" aria-label="Instagram">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+        <a href="#" class="social-btn" aria-label="Facebook">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+        <a href="#" class="social-btn" aria-label="Twitter / X">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg>
+        </a>
+        <a href="#" class="social-btn" aria-label="TikTok">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
+        </a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Shop</div>
+      <ul class="footer-links">
+        <li><a href="https://dikhatz.com/collections/caps">All Hats</a></li>
+        <li><a href="https://dikhatz.com/collections/rope-hats">Rope Hats</a></li>
+        <li><a href="https://dikhatz.com/collections/snapback">Snapbacks</a></li>
+        <li><a href="https://dikhatz.com/collections/patches">Patches</a></li>
+        <li><a href="#">Build a Bundle</a></li>
+        <li><a href="https://dikhatz.com/pages/custom-patch-design">Custom Patches</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Collections</div>
+      <ul class="footer-links">
+        <li><a href="https://dikhatz.com/pages/carolinas">Carolinas</a></li>
+        <li><a href="https://dikhatz.com/pages/dfw">DFW</a></li>
+        <li><a href="https://dikhatz.com/pages/golf">Golf</a></li>
+        <li><a href="https://dikhatz.com/pages/nola">NOLA</a></li>
+        <li><a href="https://dikhatz.com/pages/tejas">Tejas</a></li>
+        <li><a href="https://dikhatz.com/pages/dirty-south">Dirty South</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Help</div>
+      <ul class="footer-links">
+        <li><a href="https://dikhatz.com/pages/contact">Contact Us</a></li>
+        <li><a href="https://dikhatz.com/pages/about-us">About Us</a></li>
+        <li><a href="#">Track Order</a></li>
+        <li><a href="#">Returns</a></li>
+        <li><a href="#">Affiliate Program</a></li>
+        <li><a href="http://dikhatz.myshopify.com/account">My Account</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© DIK Hatz Inc. 2026. All Rights Reserved.</p>
+    <div class="footer-legal">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Use</a>
+      <a href="#">Accessibility</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // HEADER SCROLL
+  const header = document.getElementById('mainHeader');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 80);
+  });
+
+  // MOBILE NAV
+  const hamburger = document.getElementById('hamburgerBtn');
+  const mobileNav = document.getElementById('mobileNav');
+  const closeNav = document.getElementById('closeNav');
+  hamburger.addEventListener('click', () => mobileNav.classList.add('open'));
+  closeNav.addEventListener('click', () => mobileNav.classList.remove('open'));
+
+  // SCROLL REVEAL
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+  reveals.forEach(el => observer.observe(el));
+
+  // SLIDER
+  const track = document.getElementById('sliderTrack');
+  const items = track.querySelectorAll('.slide-item');
+  let currentSlide = 0;
+  const getSlideWidth = () => {
+    const item = items[0];
+    return item.offsetWidth + 24;
+  };
+  const maxSlides = () => {
+    const visible = window.innerWidth > 1100 ? 3 : window.innerWidth > 768 ? 2 : 1;
+    return Math.max(0, items.length - visible);
+  };
+  document.getElementById('nextBtn').addEventListener('click', () => {
+    currentSlide = Math.min(currentSlide + 1, maxSlides());
+    track.style.transform = `translateX(-${currentSlide * getSlideWidth()}px)`;
+  });
+  document.getElementById('prevBtn').addEventListener('click', () => {
+    currentSlide = Math.max(currentSlide - 1, 0);
+    track.style.transform = `translateX(-${currentSlide * getSlideWidth()}px)`;
+  });
+
+  // NEWSLETTER
+  function handleNewsletterSubmit(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('.newsletter-btn');
+    btn.textContent = 'Subscribed! ✓';
+    btn.style.background = '#0a0a0a';
+    e.target.querySelector('.newsletter-input').value = '';
+    setTimeout(() => { btn.textContent = 'Subscribe'; }, 3000);
+  }
+
+  // ADD TO CART BUTTONS
+  document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const count = document.querySelector('.cart-count');
+      count.textContent = parseInt(count.textContent) + 1;
+      btn.textContent = 'Added! ✓';
+      setTimeout(() => { btn.textContent = 'Add to Cart'; }, 2000);
+    });
+  });
+</script>
+</body>
+</html>
